@@ -1,10 +1,10 @@
 <script setup>
-  import Home from './components/HomePage.vue'
+
 </script>
 
 <template>
   <main>
-    <Home />
+    <router-view></router-view>
   </main>
 </template>
 
