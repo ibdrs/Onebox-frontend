@@ -1,35 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from './components/HomePage.Vue'
-import Login from './components/LoginPage.vue';
-import Dashboard from './components/Dashboard.vue';
+import HomePage from './views/HomePage.Vue';
+import AboutPage from './views/AboutPage.Vue';
+import LoginPage from './views/LoginPage.vue';
+import DashboardPage from './views/DashboardPage.vue';
 
 const routes = [
-  {
-    path: '/',
-    component: Home,
-  },
-  {
-    path: '/login',
-    component: Login,
-
-  },
-  {
-    path: '/dashboard',
-    component: Dashboard,
-    meta: { requiresAuth: true },
-  },
+  { path: '/', component: HomePage },
+  { path: '/about', component: AboutPage },
+  { path: '/login', component: LoginPage },
+  { path: '/dashboard', component: DashboardPage, meta: { requiresAuth: true }, },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = !!localStorage.getItem('user');
+  const publicPages = ['/', '/login', '/about'];
+  const authRequired = !publicPages.includes(to.path);
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next('/login');
+  if (authRequired) {
+    if (localStorage.getItem('user')) {
+      let data = JSON.parse(localStorage.getItem('user'));
+      if (!data.accessToken) {
+        next('/login');
+      } else {
+        next();
+      }
+    } else {
+      next('/login');
+    }
+
   } else {
     next();
   }

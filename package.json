@@ -10,9 +10,16 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
-    "firebase": "^11.0.1",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
+    "axios": "^1.7.7",
+    "crypto-js": "^4.2.0",
+    "vee-validate": "^4.14.7",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vuex": "^4.1.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
