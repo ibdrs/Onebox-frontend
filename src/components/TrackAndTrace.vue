@@ -25,7 +25,7 @@
     trackingData.value = null;
     loading.value = true;
     error.value = false;
-    return fetch('https://192.168.152.36/onebox_api/tracking/track/' + trackingNumber.value, {
+    return fetch('https://localhost/api/tracking/track/' + trackingNumber.value, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'

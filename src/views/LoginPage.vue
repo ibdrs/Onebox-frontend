@@ -79,7 +79,7 @@
           </div>
 
           <div class="form_group">
-            <button class="login" @click="fetchTracking" :disabled="loading">Login</button>
+            <button class="login" :disabled="loading">Login</button>
           </div>
 
           <div class="message">
