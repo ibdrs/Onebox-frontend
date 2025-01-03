@@ -1,26 +1,42 @@
-import axios from 'axios';
-import jwtService from './jwt.service';
-const API_URL = import.meta.env.VITE_API_BASE_URL + "user/";
-
 class AuthService {
   login(user) {
-    return axios
-      .post(API_URL + 'signin', {
-        username: user.username,
-        password: user.password
-      })
-      .then(response => {
-        if (response.data.accessToken) {
-          response.data.data = jwtService.decode(response.data.data);
-          localStorage.setItem('user', JSON.stringify(response.data));
-        }
+    return new Promise((resolve, reject) => {
 
-        return response.data;
-      });
+      const mockUsers = [
+        { username: "ivan", password: "test123", customerID: 1 },
+        { username: "admin", password: "adminpass", customerID: 2 }
+      ];
+
+
+      const foundUser = mockUsers.find(
+        (mockUser) => mockUser.username === user.username && mockUser.password === user.password
+      );
+
+      if (foundUser) {
+
+        const tokenPayload = {
+          username: foundUser.username,
+          customerID: foundUser.customerID
+        };
+        const mockAccessToken = btoa(JSON.stringify(tokenPayload)); // Base64-encoded mock token
+
+        const responseData = {
+          accessToken: mockAccessToken,
+          data: tokenPayload
+        };
+
+
+        localStorage.setItem("user", JSON.stringify(responseData));
+        resolve(responseData);
+      } else {
+
+        reject(new Error("Invalid username or password"));
+      }
+    });
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
   }
 }
 
