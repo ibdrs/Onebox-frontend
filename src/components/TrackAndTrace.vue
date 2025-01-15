@@ -9,20 +9,13 @@
   const API_URL = import.meta.env.VITE_API_BASE_URL;
 
   function formatDate(date) {
-    date = new Date(date * 1000);
+    date = new Date(date);
 
-    return date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+    
+    return date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
   }
-  function formatStatus(status) {
-    var statusses = {
-      0: "Geannuleerd",
-      1: "Label aangemaakt",
-      2: "Afwachten op bezorging",
-      3: "Mee met bezorger",
-      4: "Bezorgt"
-    }
-    return statusses[status];
-  }
+
+
   function fetchTracking() {
     trackingData.value = null;
     loading.value = true;
@@ -77,28 +70,21 @@
 
     <div v-if="trackingData" class="card">
       <div class="card_body">
-        <h2 class="heading">{{ trackingData.trackingCode }}</h2>
+        <h2 class="heading">{{ trackingData.trackAndTraceCode }}</h2>
 
-        <p><strong>Status:</strong> {{ formatStatus(trackingData.status) }}</p>
-        <p><strong>Huidige locatie:</strong> {{ trackingData.location }}</p>
-        <p><strong>Levertijd:</strong> {{ formatDate(trackingData.timeDeparture) }}</p>
+        <p><strong>Status:</strong> {{ trackingData.status }}</p>
+        <p><strong>Leveringsdatum:</strong> {{ formatDate(trackingData.leveringsDatum) }}</p>
+        <p><strong>Levertijd:</strong> {{ trackingData.schattingLevertijd}}</p>
 
         <hr />
 
         <h2 class="heading">Informatie</h2>
 
-        <p><strong>Naam: </strong>{{ trackingData.Name}}</p>
-        <p><strong>Adres: </strong>{{ trackingData.address }}</p>
-        <p><strong>Email: </strong>{{ trackingData.email }}</p>
-        <p><strong>Onebox ID: </strong>{{ trackingData.oneboxID }}</p>
-        <p><strong>Pakket gegevens: </strong>{{ trackingData.size }} {{ trackingData.weight }}</p>
+        <p><strong>Naam: </strong>{{ trackingData.naam }}</p>
+        <p><strong>Adres: </strong>{{ trackingData.adres }}</p>
+        <p><strong>Woonplaats: </strong>{{ trackingData.woonplaats }}</p>
+        <p><strong>Postcode: </strong>{{ trackingData.postcode }}</p>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-  .trace {
-      margin-top: 1rem;
-  }
-</style>

@@ -28,7 +28,7 @@
   const unlockBox = () => {
     //let user = localStorage.getItem('user');
     //console.log(user);
-    return fetch(`${API_URL}/Box/${userID}/unlock`, {
+    return fetch(`${API_URL}Box/${userID}/unlock`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
