@@ -4,13 +4,14 @@
   import Footer from '../components/Footer.vue';
 
   const stateLocked = ref(true);
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
 
   const user = JSON.parse(localStorage.getItem('user'));
-  const userID = user.data.customerID;
+  const userID = user.data.klantID;
 
   const fetchBoxState = async () => {
     try {
-      const response = await fetch(`https://localhost:7230/api/Box/${userID}/state`, {
+      const response = await fetch(`${API_URL}Box/${userID}/state`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -27,7 +28,7 @@
   const unlockBox = () => {
     //let user = localStorage.getItem('user');
     //console.log(user);
-    return fetch(`https://localhost:7230/api/Box/${userID}/unlock`, {
+    return fetch(`${API_URL}/Box/${userID}/unlock`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -42,7 +43,7 @@
   const lockBox = () => {
     //let user = localStorage.getItem('user');
     //console.log(user);
-    return fetch(`https://localhost:7230/api/Box/${userID}/lock`, {
+    return fetch(`${API_URL}Box/${userID}/lock`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

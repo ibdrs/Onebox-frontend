@@ -1,8 +1,9 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 class AuthService {
   login(user) {
-    return axios.post("https://localhost:7230/api/Auth/login", {
+    return axios.post(`${API_URL}Auth/login`, {
       username: user.username,
       password: user.password,
     })

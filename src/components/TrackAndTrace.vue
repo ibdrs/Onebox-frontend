@@ -6,6 +6,8 @@
   const loading = ref(false);
   const error = ref(false);
 
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
+
   function formatDate(date) {
     date = new Date(date * 1000);
 
@@ -25,7 +27,7 @@
     trackingData.value = null;
     loading.value = true;
     error.value = false;
-    return fetch('https://localhost/api/tracking/track/' + trackingNumber.value, {
+    return fetch(`${API_URL}tracking/track/` + trackingNumber.value, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'
@@ -75,7 +77,7 @@
 
     <div v-if="trackingData" class="card">
       <div class="card_body">
-        <h2 class="heading">{{trackingData.trackingCode }}</h2>
+        <h2 class="heading">{{ trackingData.trackingCode }}</h2>
 
         <p><strong>Status:</strong> {{ formatStatus(trackingData.status) }}</p>
         <p><strong>Huidige locatie:</strong> {{ trackingData.location }}</p>
@@ -85,7 +87,7 @@
 
         <h2 class="heading">Informatie</h2>
 
-        <p><strong>Naam: </strong>{{ trackingData.firstName}} {{ trackingData.middleName }} {{ trackingData.lastName }}</p>
+        <p><strong>Naam: </strong>{{ trackingData.Name}}</p>
         <p><strong>Adres: </strong>{{ trackingData.address }}</p>
         <p><strong>Email: </strong>{{ trackingData.email }}</p>
         <p><strong>Onebox ID: </strong>{{ trackingData.oneboxID }}</p>
