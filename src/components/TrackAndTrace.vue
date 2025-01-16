@@ -102,7 +102,7 @@
   }
 
   input {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid;
