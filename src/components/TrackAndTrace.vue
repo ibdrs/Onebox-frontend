@@ -88,3 +88,35 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  .page_inner_container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  button.trace {
+    padding: 10px 20px;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+</style>
